@@ -16,7 +16,7 @@ pipeline {
         // ─────────────────────────────────────────
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                     url: 'https://github.com/Thamaraikannan00011/tetris-eks-cicd.git'
                 sh 'ls -la'
             }
