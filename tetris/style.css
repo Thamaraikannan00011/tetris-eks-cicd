@@ -1,0 +1,273 @@
+:root {
+      --bg:      #ffffff;
+      --panel:   #f4f4f8;
+      --border:  #d0d0e0;
+      --accent:  #3355ff;
+      --yellow:  #e6a800;
+      --purple:  #9922dd;
+      --green:   #22aa55;
+      --red:     #ee2244;
+      --orange:  #dd6600;
+      --blue:    #2266dd;
+      --text:    #1a1a2e;
+      --dim:     rgba(26,26,46,0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(51,85,255,0.05) 0%, transparent 70%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'VT323', monospace;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* subtle dot grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(51,85,255,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LAYOUT ── */
+    .game-wrap {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 8px 32px rgba(51,85,255,0.12));
+    }
+
+    /* ── LEFT SIDEBAR ── */
+    .sidebar {
+      width: 160px;
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-right: none;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── BOARD AREA ── */
+    .board-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title-bar {
+      background: var(--accent);
+      border: 2px solid var(--accent);
+      border-bottom: none;
+      width: 100%;
+      padding: 8px 0;
+      text-align: center;
+    }
+
+    .title-bar h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.1rem;
+      color: #ffffff;
+      letter-spacing: 6px;
+    }
+
+    #gameCanvas {
+      display: block;
+      border: 2px solid var(--border);
+      border-top: none;
+      border-bottom: none;
+      image-rendering: pixelated;
+    }
+
+    .bottom-bar {
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-top: none;
+      width: 100%;
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      color: var(--dim);
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    /* ── RIGHT SIDEBAR ── */
+    .sidebar-right {
+      width: 140px;
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-left: none;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── SIDEBAR SECTIONS ── */
+    .section-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.5rem;
+      color: var(--dim);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .score-val {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.85rem;
+      color: var(--yellow);
+      word-break: break-all;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Next piece canvas */
+    #nextCanvas {
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: block;
+    }
+
+    /* Levels */
+    .level-bar {
+      display: flex;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .level-pip {
+      width: 10px; height: 10px;
+      background: var(--border);
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .level-pip.on { background: var(--accent); box-shadow: 0 0 4px rgba(51,85,255,0.4); }
+
+    /* Controls */
+    .ctrl-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.95rem;
+      color: var(--dim);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .key-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-bottom: 3px solid var(--border);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.4rem;
+      color: var(--text);
+      padding: 3px 5px;
+      min-width: 22px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── OVERLAY ── */
+    #overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.92);
+      z-index: 10;
+      gap: 14px;
+      backdrop-filter: blur(3px);
+    }
+
+    #overlay.hidden { display: none; }
+
+    .ov-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.4rem;
+      color: var(--accent);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .ov-sub {
+      font-size: 1.1rem;
+      color: var(--dim);
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .ov-score {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      color: var(--yellow);
+    }
+
+    .ov-btn {
+      background: var(--accent);
+      border: 2px solid var(--accent);
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.55rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: all 0.15s;
+      margin-top: 6px;
+    }
+
+    .ov-btn:hover {
+      background: #1a33cc;
+      border-color: #1a33cc;
+      box-shadow: 0 4px 16px rgba(51,85,255,0.35);
+    }
+
+    /* Line clear flash */
+    @keyframes flash { 0%,100%{opacity:1} 50%{opacity:0} }
+    .flash { animation: flash 0.12s 3; }
+
+    /* Mobile touch buttons */
+    .touch-controls {
+      display: none;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .touch-controls { display: grid; grid-template-columns: repeat(4,1fr); }
+      .sidebar { width: 110px; }
+      .sidebar-right { width: 110px; }
+    }
+
+    .touch-btn {
+      background: var(--panel);
+      border: 2px solid var(--border);
+      color: var(--text);
+      font-size: 1.3rem;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .touch-btn:active { background: var(--border); }

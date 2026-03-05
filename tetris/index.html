@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TETRIS</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="game-wrap">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+    <div class="stat-row">
+      <div class="section-title">SCORE</div>
+      <div class="score-val" id="scoreVal">0</div>
+    </div>
+    <div class="stat-row">
+      <div class="section-title">HIGH</div>
+      <div class="score-val" id="highVal" style="color:var(--purple);text-shadow:0 0 8px var(--purple)">0</div>
+    </div>
+    <div class="stat-row">
+      <div class="section-title">LINES</div>
+      <div class="score-val" id="linesVal" style="color:var(--green);text-shadow:0 0 8px var(--green)">0</div>
+    </div>
+    <div class="stat-row">
+      <div class="section-title">LEVEL</div>
+      <div class="score-val" id="levelVal" style="color:var(--orange);text-shadow:0 0 8px var(--orange)">1</div>
+      <div class="level-bar" id="levelPips" style="margin-top:6px"></div>
+    </div>
+    <div class="stat-row">
+      <div class="section-title">CONTROLS</div>
+      <div class="ctrl-row"><span class="key-box">◀▶</span> Move</div>
+      <div class="ctrl-row"><span class="key-box">▲</span> Rotate</div>
+      <div class="ctrl-row"><span class="key-box">▼</span> Soft drop</div>
+      <div class="ctrl-row"><span class="key-box">SPC</span> Hard drop</div>
+      <div class="ctrl-row"><span class="key-box">P</span> Pause</div>
+    </div>
+  </div>
+
+  <!-- BOARD -->
+  <div class="board-col">
+    <div class="title-bar"><h1>TETRIS</h1></div>
+    <div style="position:relative">
+      <canvas id="gameCanvas" width="300" height="600"></canvas>
+      <div id="overlay">
+        <div class="ov-title" id="ovTitle">TETRIS</div>
+        <div class="ov-sub" id="ovSub">PRESS THE START BUTTON</div>
+        <div class="ov-score" id="ovScore"></div>
+        <button class="ov-btn" id="ovBtn" onclick="startGame()">▶ START</button>
+      </div>
+    </div>
+    <div class="bottom-bar">← → ▲ ▼  SPACE  P</div>
+    <div class="touch-controls" id="touchControls">
+      <button class="touch-btn" ontouchstart="touchAction('left')">◀</button>
+      <button class="touch-btn" ontouchstart="touchAction('rotate')">↺</button>
+      <button class="touch-btn" ontouchstart="touchAction('down')">▼</button>
+      <button class="touch-btn" ontouchstart="touchAction('drop')">⬇</button>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="sidebar-right">
+    <div class="stat-row">
+      <div class="section-title">NEXT</div>
+      <canvas id="nextCanvas" width="120" height="100"></canvas>
+    </div>
+    <div class="stat-row">
+      <div class="section-title">PIECES</div>
+      <div id="pieceStats" style="display:flex;flex-direction:column;gap:4px;font-size:1rem;color:var(--dim)"></div>
+    </div>
+    <div class="stat-row" style="margin-top:auto">
+      <div class="section-title" style="margin-bottom:6px">LINE BONUS</div>
+      <div style="font-size:0.85rem;color:var(--dim);line-height:1.8">
+        1 = 100<br>
+        2 = 300<br>
+        3 = 500<br>
+        4 = 800
+      </div>
+    </div>
+  </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
